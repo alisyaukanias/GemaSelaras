@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AwakenCenter - Generasi Sehat, Paham Teknologi & Alam</title>
+    <meta name="description" content="Gerakan pemuda untuk kesehatan jasmani rohani yang selaras dengan teknologi dan pelestarian alam.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Konfigurasi Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-green': '#10B981',
+                        'brand-dark': '#064E3B',
+                        'brand-blue': '#3B82F6',
+                        'brand-earth': '#78350F',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .hover-card {
+            transition: all 0.3s ease;
+        }
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        /* Utility Classes */
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="font-sans text-gray-700 antialiased selection:bg-brand-green selection:text-white">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 bg-gradient-to-br from-brand-green to-brand-blue rounded-lg flex items-center justify-center text-white font-bold text-xl group-hover:rotate-12 transition-transform">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <span class="text-xl font-bold text-gray-800 tracking-tight">Awaken<span class="text-brand-green">Center</span></span>
+            </a>
+
+            <!-- Menu Desktop -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#home" class="text-sm font-semibold text-gray-600 hover:text-brand-green transition" data-i18n="nav_home">Beranda</a>
+                <a href="#visi" class="text-sm font-semibold text-gray-600 hover:text-brand-green transition" data-i18n="nav_vision">Visi Kami</a>
+                <a href="#program" class="text-sm font-semibold text-gray-600 hover:text-brand-green transition" data-i18n="nav_program">Program</a>
+                <a href="#galeri" class="text-sm font-semibold text-gray-600 hover:text-brand-green transition" data-i18n="nav_gallery">Galeri</a>
+                <a href="#donasi" class="bg-brand-dark text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-green transition shadow-lg hover:shadow-green-500/30" data-i18n="nav_join">Dukung Sekarang</a>
+                
+                <!-- Language Toggle Desktop -->
+                <button onclick="toggleLanguage()" class="flex items-center gap-1 px-3 py-1 border border-gray-300 rounded-full hover:bg-gray-100 transition text-sm">
+                    <i class="fa-solid fa-globe text-gray-500"></i> <span id="current-lang-display" class="font-bold">ID</span>
+                </button>
+            </div>
+
+            <!-- Tombol Mobile Menu & Lang -->
+            <div class="md:hidden flex items-center gap-4">
+                 <button onclick="toggleLanguage()" class="flex items-center gap-1 px-2 py-1 border border-gray-300 rounded-lg hover:bg-gray-100 transition text-xs">
+                    <span id="current-lang-display-mobile" class="font-bold">ID</span>
+                </button>
+                <button id="mobile-menu-btn" class="text-gray-600 focus:outline-none">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menu Mobile (Dropdown) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t p-4 absolute w-full shadow-lg">
+            <a href="#home" class="block py-2 text-gray-600 font-medium hover:text-brand-green" data-i18n="nav_home">Beranda</a>
+            <a href="#visi" class="block py-2 text-gray-600 font-medium hover:text-brand-green" data-i18n="nav_vision">Visi Kami</a>
+            <a href="#program" class="block py-2 text-gray-600 font-medium hover:text-brand-green" data-i18n="nav_program">Program</a>
+            <a href="#galeri" class="block py-2 text-gray-600 font-medium hover:text-brand-green" data-i18n="nav_gallery">Galeri</a>
+            <a href="#donasi" class="block mt-4 text-center bg-brand-green text-white py-2 rounded-lg font-bold" data-i18n="nav_join">Dukung Kami</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg h-screen flex items-center justify-center text-center px-6 relative">
+        <div class="max-w-4xl mx-auto text-white mt-16">
+            <span class="inline-block py-1 px-3 rounded-full bg-brand-green/20 border border-brand-green/50 text-brand-green font-semibold text-sm mb-6 backdrop-blur-sm animate-pulse" data-i18n="hero_badge">
+                🌱 Membangun Masa Depan Lestari
+            </span>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight" data-i18n="hero_title">
+                Harmoni Antara Jiwa, Raga,<br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">Teknologi & Alam</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto leading-relaxed" data-i18n="hero_desc">
+                Wadah bagi generasi muda untuk tumbuh sehat jasmani dan rohani, memanfaatkan teknologi secara bijak, dan kembali merawat bumi.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a href="#program" class="bg-brand-green text-white px-8 py-3.5 rounded-full font-bold hover:bg-green-500 transition shadow-lg shadow-green-500/40" data-i18n="hero_btn_program">
+                    Lihat Program
+                </a>
+                <a href="#visi" class="bg-white/10 backdrop-blur-md border border-white/30 text-white px-8 py-3.5 rounded-full font-bold hover:bg-white/20 transition" data-i18n="hero_btn_visi">
+                    Pelajari Visi Kami
+                </a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-white/50">
+            <i class="fa-solid fa-chevron-down text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- Section Visi & Misi -->
+    <section id="visi" class="py-24 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-i18n="visi_title">Pilar Pergerakan</h2>
+                <p class="text-gray-600 text-lg" data-i18n="visi_desc">Kami percaya keseimbangan adalah kunci. Gerakan ini berdiri di atas empat fondasi utama untuk menciptakan manusia yang utuh.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Pilar 1 -->
+                <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover-card relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-red-50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110"></div>
+                    <div class="w-14 h-14 bg-red-100 text-red-500 rounded-xl flex items-center justify-center text-2xl mb-6 relative z-10">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900" data-i18n="pillar_1_title">Sehat Seutuhnya</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm" data-i18n="pillar_1_desc">
+                        Membangun keseimbangan raga yang bugar, mental yang tangguh, dan jiwa yang tenang sebagai fondasi kehidupan yang utuh.
+                    </p>
+                </div>
+
+                <!-- Pilar 2 -->
+                <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover-card relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-green-50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110"></div>
+                    <div class="w-14 h-14 bg-green-100 text-brand-green rounded-xl flex items-center justify-center text-2xl mb-6 relative z-10">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900" data-i18n="pillar_2_title">Sahabat Alam</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm" data-i18n="pillar_2_desc">
+                        Menanamkan kecintaan pada lingkungan serta melatih ketangguhan dan kemandirian hidup melalui interaksi nyata dengan alam.
+                    </p>
+                </div>
+
+                <!-- Pilar 3 -->
+                <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover-card relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110"></div>
+                    <div class="w-14 h-14 bg-blue-100 text-brand-blue rounded-xl flex items-center justify-center text-2xl mb-6 relative z-10">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900" data-i18n="pillar_3_title">Tanggap Teknologi</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm" data-i18n="pillar_3_desc">
+                        Mencetak generasi yang tidak hanya adaptif, tetapi juga mampu berinovasi dan mengoptimalkan teknologi secara bijak.
+                    </p>
+                </div>
+
+                <!-- Pilar 4 -->
+                <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover-card relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-orange-50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110"></div>
+                    <div class="w-14 h-14 bg-orange-100 text-orange-500 rounded-xl flex items-center justify-center text-2xl mb-6 relative z-10">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900" data-i18n="pillar_4_title">Harmoni Sosial</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm" data-i18n="pillar_4_desc">
+                        Memupuk rasa empati dan kesadaran akan hak serta kewajiban demi terciptanya kehidupan bermasyarakat yang rukun.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Program -->
+    <section id="program" class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="mb-12">
+                <span class="text-brand-green font-bold tracking-wider uppercase text-sm mb-2 block" data-i18n="prog_badge">Aksi Nyata</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-i18n="prog_title">Program Unggulan</h2>
+            </div>
+
+            <div class="flex flex-col gap-8">
+                <!-- Program 1 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row group">
+                    <div class="md:w-2/5 h-64 md:h-auto relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="GEMAS" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute top-4 left-4">
+                             <span class="text-xs font-bold uppercase tracking-wider bg-brand-green text-white px-3 py-1.5 rounded-full shadow-md" data-i18n="tag_health">Personal Development</span>
+                        </div>
+                    </div>
+                    <div class="p-8 md:w-3/5 flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-green transition-colors" data-i18n="prog_1_title">GeMaS - Gerakan Remaja Sehat</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed" data-i18n="prog_1_desc">
+                            Kita semua mendambakan generasi penerus yang tangguh, bukan? Lewat program ini, kami tidak hanya menempa fisik mereka agar bugar, tetapi juga merawat kesehatan mental dan kedalaman spiritualnya. Kami ingin memastikan setiap anak tumbuh dengan jiwa yang tenang dalam raga yang kuat, siap menghadapi tantangan zaman dengan kewarasan yang utuh.
+                        </p>
+                        <div class="flex items-center gap-6 mt-auto">
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fa-regular fa-calendar mr-2"></i> <span data-i18n="period_weekly">Setiap Minggu</span>
+                            </div>
+                            <a href="#" class="text-brand-green font-bold text-sm inline-flex items-center hover:underline">
+                                <span data-i18n="btn_detail">Detail Kegiatan</span> <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Program 2 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row group">
+                    <div class="md:w-2/5 h-64 md:h-auto relative overflow-hidden md:order-2">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="POPO" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute top-4 right-4">
+                             <span class="text-xs font-bold uppercase tracking-wider bg-brand-blue text-white px-3 py-1.5 rounded-full shadow-md" data-i18n="tag_tech">Interpersonal</span>
+                        </div>
+                    </div>
+                    <div class="p-8 md:w-3/5 flex flex-col justify-center md:order-1">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-blue transition-colors" data-i18n="prog_2_title">POPO - Pemimpin Oke, Pengikut Oke</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed" data-i18n="prog_2_desc">
+                            Hidup rukun di tengah masyarakat modern adalah tantangan tersendiri. Di sini, kami menanamkan kesadaran sosial kepada remaja: memahami hak diri sendiri sembari menghormati kewajiban terhadap orang lain. Tujuannya adalah menciptakan harmoni, di mana mereka bisa menjadi warga yang santun, peduli, dan membawa dampak positif bagi lingkungannya.
+                        </p>
+                        <div class="flex items-center gap-6 mt-auto">
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fa-regular fa-calendar mr-2"></i> <span data-i18n="period_quarterly">Per 3 Bulan</span>
+                            </div>
+                            <a href="#" class="text-brand-blue font-bold text-sm inline-flex items-center hover:underline">
+                                <span data-i18n="btn_detail">Detail Kegiatan</span> <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Program 3 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row group">
+                    <div class="md:w-2/5 h-64 md:h-auto relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="GETEK" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute top-4 left-4">
+                             <span class="text-xs font-bold uppercase tracking-wider bg-brand-dark text-white px-3 py-1.5 rounded-full shadow-md" data-i18n="tag_nature">Digital Skills</span>
+                        </div>
+                    </div>
+                    <div class="p-8 md:w-3/5 flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-dark transition-colors" data-i18n="prog_3_title">GeTek - Genggam Teknologi</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed" data-i18n="prog_3_desc">
+                            Teknologi adalah kenyataan yang tak terhindarkan. Tugas kami memastikan remaja tidak ‘tenggelam’, melainkan mampu berenang memanfaatkannya. Kami ajarkan mereka cara mengoptimalkan teknologi agar hidup lebih produktif dan efisien. Dan khusus bagi mereka yang memiliki bakat lebih, kami sediakan ruang inkubasi untuk berkreasi melahirkan inovasi yang nyata.
+                        </p>
+                        <div class="flex items-center gap-6 mt-auto">
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fa-regular fa-calendar mr-2"></i> <span data-i18n="period_monthly">Bulanan</span>
+                            </div>
+                            <a href="#" class="text-brand-green font-bold text-sm inline-flex items-center hover:underline">
+                                <span data-i18n="btn_detail">Detail Kegiatan</span> <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                 <!-- Program 4 -->
+                 <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row group">
+                    <div class="md:w-2/5 h-64 md:h-auto relative overflow-hidden md:order-2">
+                        <img src="https://images.unsplash.com/photo-1506765515384-028b60a970df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="LOTEC" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute top-4 right-4">
+                             <span class="text-xs font-bold uppercase tracking-wider bg-orange-500 text-white px-3 py-1.5 rounded-full shadow-md" data-i18n="tag_social">Life Skills</span>
+                        </div>
+                    </div>
+                    <div class="p-8 md:w-3/5 flex flex-col justify-center md:order-1">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-orange-500 transition-colors" data-i18n="prog_4_title">LoTec - Low Technology</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed" data-i18n="prog_4_desc">
+                            Namun, kami juga sadar bahwa ketangguhan sejati diuji saat fasilitas tiada. Program ini adalah penyeimbang; kami melatih kemandirian dan keterampilan dasar kehidupan (life skills). Agar kelak, dalam situasi minim teknologi sekalipun, anak-anak kita tidak menjadi lumpuh, melainkan tetap mampu bertahan hidup dan berdaya guna.
+                        </p>
+
+                        <div class="flex items-center gap-6 mt-auto">
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fa-regular fa-calendar mr-2"></i> <span data-i18n="period_biweekly">Dwi-Mingguan</span>
+                            </div>
+                            <a href="#" class="text-orange-500 font-bold text-sm inline-flex items-center hover:underline">
+                                <span data-i18n="btn_detail">Detail Kegiatan</span> <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Dokumentasi Aktifitas -->
+    <section id="galeri" class="py-24 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div>
+                    <span class="text-brand-green font-bold tracking-wider uppercase text-sm mb-2 block" data-i18n="doc_badge">Dokumentasi</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900" data-i18n="doc_title">Jejak Langkah Kami</h2>
+                </div>
+                <a href="#" class="hidden md:inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-600 hover:border-brand-green hover:text-brand-green transition mt-4 md:mt-0">
+                    <i class="fa-brands fa-instagram mr-2"></i> <span data-i18n="btn_ig">Lihat di Instagram</span>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
+                <!-- Galeri Images -->
+                <div class="col-span-2 row-span-2 relative group rounded-2xl overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Kerja Bakti" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <p class="text-white font-bold text-lg"><i class="fa-solid fa-users mr-2"></i> <span data-i18n="doc_img_1">Kerja Bakti Massal</span></p>
+                    </div>
+                </div>
+                
+                <div class="relative group rounded-2xl overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Diskusi" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                         <i class="fa-solid fa-magnifying-glass text-white text-xl"></i>
+                    </div>
+                </div>
+
+                <div class="relative group rounded-2xl overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Belajar Online" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                         <i class="fa-solid fa-magnifying-glass text-white text-xl"></i>
+                    </div>
+                </div>
+
+                <div class="col-span-2 relative group rounded-2xl overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Rapat Tim" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                         <p class="text-white font-bold"><i class="fa-solid fa-handshake mr-2"></i><span data-i18n="doc_img_2">Kolaborasi Komunitas</span></p>
+                    </div>
+                </div>
+                 
+                 <div class="relative group rounded-2xl overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Bibit" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                         <i class="fa-solid fa-magnifying-glass text-white text-xl"></i>
+                    </div>
+                </div>
+                
+                <div class="relative group rounded-2xl overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1594818379496-da1e345b0ded?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Olahraga" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                         <i class="fa-solid fa-magnifying-glass text-white text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote / Motivational Section -->
+    <section class="py-20 bg-brand-dark text-white relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10">
+            <i class="fa-solid fa-quote-right text-[20rem] absolute -top-10 -right-20"></i>
+        </div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <h2 class="text-2xl md:text-4xl font-serif italic mb-6" data-i18n="quote_text">
+                "Pahami dirimu, orang lain dan tempatmu tinggal, lalu kuasai teknologi. Maka hidup akan lebih mudah dan damai."
+            </h2>
+            <div class="flex items-center justify-center gap-4">
+                <div class="h-1 w-12 bg-brand-green"></div>
+                <p class="font-bold tracking-widest uppercase text-sm" data-i18n="quote_label">Filosofi Kami</p>
+                <div class="h-1 w-12 bg-brand-green"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Donasi -->
+    <section id="donasi" class="py-24 bg-white relative border-b border-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-green font-bold tracking-wider uppercase text-sm mb-2 block" data-i18n="donate_badge">Mari Berbagi</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-i18n="donate_title">Dukung Langkah Kecil Kami</h2>
+                <p class="text-gray-600 text-lg" data-i18n="donate_desc">Kontribusi Anda menjadi bahan bakar bagi kami untuk terus menanam kebaikan, baik berupa pohon, bibit tanaman, maupun ilmu pengetahuan bagi generasi muda.</p>
+            </div>
+
+            <div class="max-w-5xl mx-auto">
+                <!-- Wrapper Indonesia -->
+                <div id="donation-id" class="donation-content-group transition-opacity duration-300">
+                    
+                    <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-start mb-8">
+                        <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 shadow-lg text-center relative overflow-hidden group hover:shadow-xl transition-shadow duration-300 h-full">
+                            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-brand-green to-brand-blue"></div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Scan QRIS</h3>
+                            <p class="text-sm text-gray-500 mb-6">Mendukung GoPay, OVO, Dana, & Mobile Banking</p>
+                            <div class="bg-white p-4 rounded-xl shadow-inner inline-block mb-6 mx-auto border border-gray-200">
+                                <div class="w-48 h-48 bg-gray-100 flex flex-col items-center justify-center rounded-lg text-gray-400">
+                                    <i class="fa-solid fa-qrcode text-6xl mb-2"></i>
+                                    <span class="text-xs">Kode QR Donasi</span>
+                                </div>
+                            </div>
+                            <p class="font-mono text-gray-600 text-sm">NMID: ID1234567890123</p>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div class="bg-red-50 p-6 rounded-2xl flex items-start gap-4 hover:bg-red-100/50 transition duration-300 border border-red-100">
+                                <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-500 shrink-0 shadow-sm">
+                                    <i class="fa-solid fa-ice-cream text-xl"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-gray-900 text-lg">Trakteer</h4>
+                                    <p class="text-gray-600 text-sm mb-3">Dukung kreator lokal dengan unit donasi (Cendol/Ice Cream).</p>
+                                    <a href="#" class="inline-flex items-center justify-center px-5 py-2 bg-red-500 text-white text-sm font-semibold rounded-lg hover:bg-red-600 transition shadow-md shadow-red-200">
+                                        <span>Traktir Kami</span> <i class="fa-solid fa-heart ml-2 text-xs"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="bg-blue-50 p-6 rounded-2xl flex items-start gap-4 hover:bg-blue-100/50 transition duration-300">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-brand-blue shrink-0 shadow-sm">
+                                    <i class="fa-solid fa-building-columns text-xl"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-gray-900 text-lg">Transfer Bank</h4>
+                                    <p class="text-gray-600 text-sm mb-3">Bank Syariah Indonesia (BSI)</p>
+                                    <div class="flex items-center justify-between bg-white px-4 py-3 rounded-lg border border-blue-100 shadow-sm">
+                                        <span class="font-mono font-bold text-lg text-gray-800 tracking-wider">7123 4567 8900</span>
+                                        <button class="text-gray-400 hover:text-brand-blue transition p-1" onclick="navigator.clipboard.writeText('712345678900')">
+                                            <i class="fa-regular fa-copy"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="max-w-3xl mx-auto">
+                        <div class="bg-green-50 p-6 md:p-8 rounded-2xl flex flex-col md:flex-row items-center md:items-start gap-6 border border-green-100 shadow-sm text-center md:text-left">
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-brand-green shrink-0 shadow-sm">
+                                <i class="fa-brands fa-whatsapp text-3xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-gray-900 text-xl">Konfirmasi Donasi</h4>
+                                <p class="text-gray-600 mb-0">Sudah transfer? Konfirmasi via WhatsApp agar tercatat.</p>
+                            </div>
+                            <a href="#" class="shrink-0 inline-flex items-center justify-center px-8 py-3 bg-brand-green text-white font-semibold rounded-lg hover:bg-green-600 transition">
+                                <span>Kirim Bukti</span> <i class="fa-solid fa-paper-plane ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wrapper International -->
+                <div id="donation-en" class="hidden donation-content-group transition-opacity duration-300">
+                    
+                    <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-start mb-8">
+                        
+                        <div class="bg-slate-900 p-8 rounded-3xl border border-slate-800 shadow-lg text-center relative overflow-hidden group hover:shadow-xl transition-shadow duration-300 h-full text-white">
+                            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-purple-500 to-indigo-500"></div>
+                            <h3 class="text-xl font-bold mb-2">Global Support</h3>
+                            <p class="text-sm text-slate-400 mb-8">Secure payment via Stripe or Credit Cards.</p>
+                            
+                            <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 mb-6 max-w-xs mx-auto">
+                                <div class="flex justify-center gap-4 text-3xl text-slate-300 mb-4">
+                                    <i class="fa-brands fa-cc-visa hover:text-white transition"></i>
+                                    <i class="fa-brands fa-cc-mastercard hover:text-white transition"></i>
+                                    <i class="fa-brands fa-stripe hover:text-white transition"></i>
+                                </div>
+                                <p class="text-xs text-slate-500">Encrypted & Secure Transaction</p>
+                            </div>
+
+                            <a href="#" class="inline-block w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg transition shadow-lg shadow-indigo-500/30">
+                                Donate via Stripe <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+
+                        <div class="space-y-6">
+                            
+                            <div class="bg-yellow-50 p-6 rounded-2xl flex items-start gap-4 hover:bg-yellow-100/50 transition duration-300 border border-yellow-100">
+                                <div class="w-12 h-12 bg-yellow-400 text-white rounded-full flex items-center justify-center shrink-0 shadow-sm text-lg">
+                                    <i class="fa-solid fa-mug-hot"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-gray-900 text-lg">Buy Me a Coffee</h4>
+                                    <p class="text-gray-600 text-sm mb-3">Small support goes a long way. Buy us a virtual coffee!</p>
+                                    <a href="#" class="inline-flex items-center justify-center px-5 py-2 bg-yellow-400 text-slate-900 text-sm font-bold rounded-lg hover:bg-yellow-500 transition shadow-md shadow-yellow-200">
+                                        <span>Support on BMC</span> 
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="bg-blue-50 p-6 rounded-2xl flex items-start gap-4 hover:bg-blue-100/50 transition duration-300 border border-blue-100">
+                                <div class="w-12 h-12 bg-[#00457C] text-white rounded-full flex items-center justify-center shrink-0 shadow-sm text-lg">
+                                    <i class="fa-brands fa-paypal"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-gray-900 text-lg">PayPal</h4>
+                                    <p class="text-gray-600 text-sm mb-3">Send donation directly via PayPal secure transfer.</p>
+                                    <a href="#" class="inline-flex items-center justify-center px-5 py-2 bg-[#00457C] text-white text-sm font-bold rounded-lg hover:bg-[#00305c] transition shadow-md shadow-blue-200">
+                                        <span>PayPal Me</span> 
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="max-w-3xl mx-auto">
+                        <div class="bg-white p-6 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 border border-gray-200 shadow-sm">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-600">
+                                    <i class="fa-regular fa-envelope"></i>
+                                </div>
+                                <p class="text-gray-600 text-sm">Need a receipt for tax deduction purposes?</p>
+                            </div>
+                            <a href="mailto:hello@yoursite.com" class="text-brand-blue font-semibold hover:underline text-sm">
+                                Contact our Team
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="col-span-1 md:col-span-2">
+                    <a href="#" class="flex items-center gap-2 mb-4 text-white">
+                        <i class="fa-solid fa-leaf text-brand-green"></i>
+                        <span class="text-xl font-bold">Awaken<span class="text-brand-green">Center</span></span>
+                    </a>
+                    <p class="text-sm leading-relaxed max-w-sm" data-i18n="footer_desc">
+                        Sebuah inisiatif non-profit untuk menyatukan potensi pemuda, kemajuan teknologi, dan kearifan ekologi demi masa depan yang berkelanjutan.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4" data-i18n="footer_nav">Navigasi</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#home" class="hover:text-brand-green transition" data-i18n="nav_home">Beranda</a></li>
+                        <li><a href="#visi" class="hover:text-brand-green transition" data-i18n="nav_vision">Tentang Kami</a></li>
+                        <li><a href="#program" class="hover:text-brand-green transition" data-i18n="nav_program">Program</a></li>
+                        <li><a href="#galeri" class="hover:text-brand-green transition" data-i18n="nav_gallery">Galeri</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Sosial Media</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-green hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-blue hover:text-white transition"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-sm">
+                <p>&copy; 2023 GemaSelaras Foundation. <span data-i18n="footer_rights">Dilindungi Undang-Undang.</span></p>
+                <p class="mt-2 text-xs" data-i18n="footer_love">Dibuat dengan <i class="fa-solid fa-heart text-red-500 mx-1"></i> untuk Bumi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Logic Bahasa & Mobile Menu -->
+    <script>
+        // Data Terjemahan
+        const translations = {
+            id: {
+                nav_home: "Beranda",
+                nav_vision: "Visi Kami",
+                nav_program: "Program",
+                nav_gallery: "Galeri",
+                nav_join: "Dukung Kami",
+                hero_badge: "🌱 Membangun Masa Depan Lestari",
+                hero_title: `Harmoni Antara Jiwa, Raga,<br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">Teknologi & Alam</span>`,
+                hero_desc: "Wadah bagi generasi muda untuk tumbuh sehat jasmani dan rohani, memanfaatkan teknologi secara bijak, dan kembali merawat bumi.",
+                hero_btn_program: "Lihat Program",
+                hero_btn_visi: "Pelajari Visi Kami",
+                visi_title: "Pilar Pergerakan",
+                visi_desc: "Kami percaya keseimbangan adalah kunci. Gerakan ini berdiri di atas empat fondasi utama untuk menciptakan manusia yang utuh.",
+                pillar_1_title: "Kesehatan Holistik",
+                pillar_1_desc: "Membangun keseimbangan raga yang bugar, mental yang tangguh, dan jiwa yang tenang sebagai fondasi kehidupan yang utuh.",
+                pillar_2_title: "Sahabat Alam",
+                pillar_2_desc: "Menanamkan kecintaan pada lingkungan serta melatih ketangguhan dan kemandirian hidup melalui interaksi nyata dengan alam.",
+                pillar_3_title: "Tanggap Teknologi",
+                pillar_3_desc: "Mencetak generasi yang adaptif, mengoptimalkan teknologi secara bijak, serta mampu berinovasi .",
+                pillar_4_title: "Harmoni Sosial",
+                pillar_4_desc: "Memupuk rasa empati dan kesadaran akan hak serta kewajiban demi terciptanya kehidupan bermasyarakat yang rukun.",
+                prog_badge: "Aksi Nyata",
+                prog_title: "Program Unggulan",
+                tag_health: "Kesehatan",
+                tag_tech: "Teknologi",
+                tag_nature: "Lingkungan",
+                tag_social: "Sosial",
+                prog_1_title: "GeMaS - Gerakan Remaja Sehat",
+                prog_1_desc: "Kita semua mendambakan generasi penerus yang tangguh, bukan? Lewat program ini, kami tidak hanya menempa fisik mereka agar bugar, tetapi juga merawat kesehatan mental dan kedalaman spiritualnya. Kami ingin memastikan setiap anak tumbuh dengan jiwa yang tenang dalam raga yang kuat, siap menghadapi tantangan zaman dengan kewarasan yang utuh.",
+                prog_2_title: "POPO - Pemimpin Oke, Pengikut Oke",
+                prog_2_desc: "Hidup rukun di tengah masyarakat modern adalah tantangan tersendiri. Di sini, kami menanamkan kesadaran sosial kepada remaja: memahami hak diri sendiri sembari menghormati kewajiban terhadap orang lain. Tujuannya adalah menciptakan harmoni, di mana mereka bisa menjadi warga yang santun, peduli, dan membawa dampak positif bagi lingkungannya.",
+                prog_3_title: "GeTek - Genggam Teknologi",
+                prog_3_desc: "Teknologi adalah kenyataan yang tak terhindarkan. Tugas kami memastikan remaja tidak ‘tenggelam’, melainkan mampu berenang memanfaatkannya. Kami ajarkan mereka cara mengoptimalkan teknologi agar hidup lebih produktif dan efisien. Dan khusus bagi mereka yang memiliki bakat lebih, kami sediakan ruang inkubasi untuk berkreasi melahirkan inovasi yang nyata.",
+                prog_4_title: "LoTec - Low Technology",
+                prog_4_desc: "Namun, kami juga sadar bahwa ketangguhan sejati diuji saat fasilitas tiada. Program ini adalah penyeimbang; kami melatih kemandirian dan keterampilan dasar kehidupan (life skills). Agar kelak, dalam situasi minim teknologi sekalipun, anak-anak kita tidak menjadi lumpuh, melainkan tetap mampu bertahan hidup dan berdaya guna.",
+                period_weekly: "Setiap Minggu",
+                period_quarterly: "Per 3 Bulan",
+                period_monthly: "Bulanan",
+                period_biweekly: "Dwi-Mingguan",
+                btn_detail: "Detail Kegiatan",
+                doc_badge: "Dokumentasi",
+                doc_title: "Jejak Langkah Kami",
+                btn_ig: "Lihat di Instagram",
+                doc_img_1: "Kerja Bakti Massal",
+                doc_img_2: "Kolaborasi Komunitas",
+                quote_text: `"Pahami dirimu, orang lain dan tempatmu tinggal, lalu kuasai teknologi. Maka hidup akan lebih mudah dan damai."`,
+                quote_label: "Filosofi Kami",
+                donate_badge: "Mari Berbagi",
+                donate_title: "Dukung Langkah Kecil Kami",
+                donate_desc: "Kontribusi Anda menjadi bahan bakar bagi kami untuk terus menanam kebaikan, baik berupa pohon, bibit tanaman, maupun ilmu pengetahuan bagi generasi muda.",
+                donate_qris_sup: "Mendukung GoPay, OVO, Dana, & Mobile Banking",
+                donate_qr_placeholder: "Kode QR Donasi",
+                donate_bank_title: "Transfer Bank",
+                donate_confirm_title: "Konfirmasi Donasi",
+                donate_confirm_desc: "Sudah melakukan transfer? Silakan konfirmasi agar kami dapat mencatat amanah Anda.",
+                btn_confirm: "Kirim Bukti Transfer",
+                contact_title: "Mari Berkolaborasi!",
+                contact_desc: "Punya ide untuk lingkungan? Ingin menjadi relawan? Atau sekadar ingin menyapa? Kami menunggu Anda.",
+                footer_desc: "Sebuah inisiatif non-profit untuk menyatukan potensi pemuda, kemajuan teknologi, dan kearifan ekologi demi masa depan yang berkelanjutan.",
+                footer_nav: "Navigasi",
+                footer_rights: "Dilindungi Undang-Undang.",
+                footer_love: `Dibuat dengan <i class="fa-solid fa-heart text-red-500 mx-1"></i> untuk Bumi.`
+            },
+            en: {
+                nav_home: "Home",
+                nav_vision: "Our Vision",
+                nav_program: "Programs",
+                nav_gallery: "Gallery",
+                nav_join: "Support Us",
+                hero_badge: "🌱 Building a Sustainable Future",
+                hero_title: `Harmony Between Body, Soul,<br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">Technology & Nature</span>`,
+                hero_desc: "A platform for youth to grow physically and mentally healthy, use technology wisely, and return to caring for the earth.",
+                hero_btn_program: "View Programs",
+                hero_btn_visi: "Learn Our Vision",
+                visi_title: "Our Pillars",
+                visi_desc: "We believe balance is key. This movement stands on four main foundations to create complete human beings.",
+                pillar_1_title: "Holistic Wellness",
+                pillar_1_desc: "Cultivating a balance of physical fitness, mental resilience, and spiritual serenity as the foundation for a wholesome life.",
+                pillar_2_title: "Nature's Ally",
+                pillar_2_desc: "Instilling a love for the environment while forging resilience and self-reliance through hands-on interaction with nature.",
+                pillar_3_title: "Tech Savvy",
+                pillar_3_desc: "Empowering an adaptive generation to optimize technology wisely and drive meaningful innovation.",
+                pillar_4_title: "Social Harmony",
+                pillar_4_desc: "Nurturing empathy and civic awareness—balancing rights and duties—to foster a harmonious community.",
+                prog_badge: "Real Action",
+                prog_title: "Featured Programs",
+                tag_health: "Health",
+                tag_tech: "Technology",
+                tag_nature: "Nature",
+                tag_social: "Social",
+                prog_1_title: "GeMaS - Healthy Youth Movement",
+                prog_1_desc: "We all envision a resilient future generation. Through this program, we go beyond physical fitness to nurture mental strength and spiritual depth. We ensure every child grows with a serene soul in a strong body, ready to face the world's challenges with stability and complete sanity.",
+                prog_2_title: "POPO - Great Leaders, Great Followers",
+                prog_2_desc: "Living in harmony is a modern challenge. Here, we instill social awareness in youth: understanding personal rights while respecting obligations to others. Our goal is to create harmony, molding polite, caring citizens who bring a positive impact to their surroundings.",
+                prog_3_title: "GeTek - Tech Mastery",
+                prog_3_desc: "Technology is an inevitable reality. Our mission is to ensure youth don't 'drown' in it, but learn to 'swim' and leverage it. We teach them to optimize tech for productivity and efficiency. For those with exceptional talent, we provide an incubation space to create real-world innovations.",
+                prog_4_title: "LoTec - Low Technology",
+                prog_4_desc: "True resilience is tested when facilities are scarce. This program acts as a counterbalance; we train independence and essential life skills. So even in low-tech situations, our children won't be helpless—they will remain capable, adaptable, and self-reliant.",
+                period_weekly: "Weekly",
+                period_quarterly: "Every 3 Months",
+                period_monthly: "Monthly",
+                period_biweekly: "Bi-Weekly",
+                btn_detail: "Activity Details",
+                doc_badge: "Documentation",
+                doc_title: "Our Footsteps",
+                btn_ig: "View on Instagram",
+                doc_img_1: "Mass Community Service",
+                doc_img_2: "Community Collaboration",
+                quote_text: "Understand yourself, others, and your environment, then master technology. Only then will life become easier and peaceful.",
+                quote_label: "Our Philosophy",
+                donate_badge: "Let's Share",
+                donate_title: "Support Our Small Steps",
+                donate_desc: "Your contribution fuels us to continue planting kindness, whether in the form of trees, plant seeds, or knowledge for the younger generation.",
+                donate_qris_sup: "Supports GoPay, OVO, Dana, & Mobile Banking",
+                donate_qr_placeholder: "Donation QR Code",
+                donate_bank_title: "Bank Transfer",
+                donate_confirm_title: "Confirm Donation",
+                donate_confirm_desc: "Already transferred? Please confirm so we can record your trust.",
+                btn_confirm: "Send Transfer Proof",
+                footer_desc: "A non-profit initiative to unite youth potential, technological advancement, and ecological wisdom for a sustainable future.",
+                footer_nav: "Navigation",
+                footer_rights: "All Rights Reserved.",
+                footer_love: `Made with <i class="fa-solid fa-heart text-red-500 mx-1"></i> for Earth.`
+            }
+        };
+
+        let currentLang = 'id';
+
+        // Fungsi Utama Update Konten
+        function updateContent(lang) {
+            currentLang = lang;
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            // Update indikator bahasa
+            document.getElementById('current-lang-display').textContent = lang.toUpperCase();
+            document.getElementById('current-lang-display-mobile').textContent = lang.toUpperCase();
+
+            // === PERBAIKAN DI SINI: Panggil fungsi update donasi ===
+            updateDonationSection(lang);
+        }
+
+        // Fungsi Logika Tampilan Donasi (Hidden/Show)
+        function updateDonationSection(lang) {
+            const donationID = document.getElementById('donation-id');
+            const donationEN = document.getElementById('donation-en');
+
+            if (!donationID || !donationEN) return;
+
+            if (lang === 'id') {
+                donationID.classList.remove('hidden');
+                donationEN.classList.add('hidden');
+            } else {
+                donationID.classList.add('hidden');
+                donationEN.classList.remove('hidden');
+            }
+        }
+
+        function toggleLanguage() {
+            const newLang = currentLang === 'id' ? 'en' : 'id';
+            updateContent(newLang);
+        }
+
+        // Deteksi Bahasa Berdasarkan Zona Waktu saat load
+        window.addEventListener('DOMContentLoaded', () => {
+            const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            
+            const indoZones = [
+                "Asia/Jakarta",
+                "Asia/Pontianak", 
+                "Asia/Makassar",
+                "Asia/Ujung_Pandang",
+                "Asia/Jayapura"
+            ];
+
+            const isIndonesia = indoZones.some(zone => timeZone.includes(zone)) || timeZone.includes("Jakarta");
+
+            if (isIndonesia) {
+                updateContent('id');
+            } else {
+                updateContent('en');
+            }
+        });
+
+        // Mobile Menu Logic
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const navbar = document.getElementById('navbar');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-md');
+                navbar.classList.replace('bg-white/90', 'bg-white/95');
+            } else {
+                navbar.classList.remove('shadow-md');
+                navbar.classList.replace('bg-white/95', 'bg-white/90');
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                menu.classList.add('hidden');
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
